@@ -1,5 +1,13 @@
+const {prisma} = require('../prisma/')
+
 const login = async (req, res) => {
-  res.send('login');
+  const { email, password } = req.body;
+
+  if (!email && !password) {
+    return res.status(400).json({ message: 'Please enter all fields' });
+  }
+
+  const user = await 
 };
 
 const register = async (req, res) => {
