@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const usersRouter = require('./routes/users.js');
+const employeesRouter = require('./routes/employees.js');
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/user', usersRouter);
+app.use('/api/employees', employeesRouter);
 
 module.exports = app;
