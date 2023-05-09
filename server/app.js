@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users.js');
 
 const app = express();
 
