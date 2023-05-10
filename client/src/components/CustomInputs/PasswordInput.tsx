@@ -15,7 +15,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ ...props }) => {
       rules={[
         {
           required: true,
-          message: 'Обязательное поле',
+          message: `Please enter your ${props.name}!`,
         },
         ({ getFieldValue }) => ({
           validator(_, value) {
@@ -43,7 +43,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ ...props }) => {
         }),
       ]}
     >
-      <Input {...props} />
+      <Input.Password {...props} />
     </Form.Item>
   );
 };

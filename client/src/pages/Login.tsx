@@ -9,11 +9,12 @@ const Login = () => {
   return (
     <Container>
       <Row align='middle' justify='center'>
-        <Card title='Login' style={{ width: 300 }}>
+        <Card title='Login' style={{ width: '300px' }}>
           <Form
             onFinish={() => {
               'login';
             }}
+            style={{ marginBottom: '16px' }}
           >
             <CustomInput name='email' placeholder='Email' type='email' />
             <PasswordInput name='password' placeholder='Password' />
@@ -21,7 +22,7 @@ const Login = () => {
             <CustomButton
               type='primary'
               htmlType='submit'
-              style={{ width: '100%' }}
+              style={{ width: 'fit-content' }}
             >
               Login
             </CustomButton>

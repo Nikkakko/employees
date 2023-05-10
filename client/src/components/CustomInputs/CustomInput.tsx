@@ -14,7 +14,7 @@ const CustomInput: React.FC<CustomInputProps> = ({ ...props }) => {
       rules={[
         {
           required: true,
-          message: 'Please enter your email!',
+          message: `Please enter your ${props.name}!`,
         },
         ({ getFieldValue }) => ({
           validator(_, value) {
