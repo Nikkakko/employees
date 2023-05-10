@@ -25,8 +25,6 @@ const Container = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   color: white;
-
-  border: 1px solid red;
 `;
 
 export default RootLayout;
