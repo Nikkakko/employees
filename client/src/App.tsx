@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import router from './routes/router';
 import { ConfigProvider, theme } from 'antd';
+import Auth from './features/auth/auth';
 
 const App = () => {
   return (
@@ -9,7 +10,9 @@ const App = () => {
         algorithm: theme.darkAlgorithm,
       }}
     >
-      <RouterProvider router={router} />
+      <Auth>
+        <RouterProvider router={router} />
+      </Auth>
     </ConfigProvider>
   );
 };

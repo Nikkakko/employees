@@ -8,6 +8,7 @@ import { Paths } from '../Paths';
 import { UserType, useLoginMutation } from '../app/services/auth';
 import { isErrorWithMessage } from '../utils/errorMessage';
 import ErrorMsg from '../components/ErrorMsg';
+
 const Login = () => {
   const [loginUser, loginUserResult] = useLoginMutation();
   const [error, setError] = useState<string | null>(null);

@@ -4,9 +4,13 @@ import { TeamOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { CustomButton } from '.';
 import { useNavigate, Link } from 'react-router-dom';
 import { Paths } from '../Paths';
+import { useAppDispatch, useAppSelector } from '../app/hook';
+import { logout } from '../features/auth/authSlice';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
 
   const handleNavigate = () => {
     navigate(Paths.home);
@@ -22,17 +26,38 @@ const Header = () => {
           </Typography.Title>
         </CustomButton>
       </StyledSpace>
+
       <Space>
-        <Link to={Paths.register}>
-          <CustomButton type='ghost' icon={<UserOutlined />}>
-            Register
-          </CustomButton>
-        </Link>
-        <Link to={Paths.login}>
-          <CustomButton type='ghost' icon={<LoginOutlined />}>
-            Login
-          </CustomButton>
-        </Link>
+        {isAuthenticated ? (
+          <>
+            <Typography.Text
+              style={{ marginRight: 12, textTransform: 'capitalize' }}
+              strong
+            >
+              {user?.user.name}
+            </Typography.Text>
+            <CustomButton
+              type='ghost'
+              icon={<LoginOutlined />}
+              onClick={() => dispatch(logout())}
+            >
+              Logout
+            </CustomButton>
+          </>
+        ) : (
+          <Space>
+            <Link to={Paths.register}>
+              <CustomButton type='ghost' icon={<UserOutlined />}>
+                Register
+              </CustomButton>
+            </Link>
+            <Link to={Paths.login}>
+              <CustomButton type='ghost' icon={<LoginOutlined />}>
+                Login
+              </CustomButton>
+            </Link>
+          </Space>
+        )}
       </Space>
     </Container>
   );

@@ -1,10 +1,14 @@
 import { api } from './api';
 
 export type UserType = {
-  id: string;
-  email: string;
-  password: string;
-  name: string;
+  token: string;
+
+  user: {
+    id: string;
+    email: string;
+    password: string;
+    name: string;
+  };
 };
 
 export type loginData = Omit<UserType, 'id'>;
