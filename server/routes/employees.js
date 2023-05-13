@@ -22,6 +22,6 @@ router.post('/add', auth, addEmployee);
 router.put('/edit/:id', auth, editEmployee);
 
 // @route   DELETE api/employee/:id
-router.post('/remove/:id', auth, removeEmployee);
+router.delete('/remove/:id', auth, removeEmployee);
 
 module.exports = router;

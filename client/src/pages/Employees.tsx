@@ -12,15 +12,11 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '../Paths';
 import { useAppSelector } from '../app/hook';
 import AddEmployeeModal from '../components/AddEmployeeModal';
-import { useCreateEmployeeMutation } from '../app/services/employees';
-import { isErrorWithMessage } from '../utils/errorMessage';
 
 const Employees = () => {
   const { data, isLoading } = useGetAllEmployeesQuery();
   const { user } = useAppSelector(state => state.auth);
-  const [createEmployee] = useCreateEmployeeMutation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,31 +25,11 @@ const Employees = () => {
     }
   }, [navigate, user]);
 
-  const handleAdd = () => {
-    navigate(Paths.employeeAdd);
-  };
-
   useEffect(() => {
     if (!user) {
       navigate(Paths.login);
     }
   }, [navigate, user]);
-
-  const handleCreateEmployee = async (values: EmployeeType) => {
-    try {
-      await createEmployee(values).unwrap();
-      navigate(`${Paths.status}/created}`);
-      setIsModalOpen(false);
-    } catch (err) {
-      const error = isErrorWithMessage(err);
-
-      if (error) {
-        setError(err.data.message);
-      } else {
-        setError('Something went wrong');
-      }
-    }
-  };
 
   const columns: ColumnsType<EmployeeType> = [
     {
@@ -84,10 +60,6 @@ const Employees = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = values => {
-    console.log(values);
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -116,12 +88,7 @@ const Employees = () => {
         }}
       />
 
-      <AddEmployeeModal
-        onOpen={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        error={error}
-      />
+      <AddEmployeeModal onOpen={isModalOpen} onCancel={handleCancel} />
     </Container>
   );
 };

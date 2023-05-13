@@ -1,7 +1,7 @@
 import { Alert } from 'antd';
 
 type Props = {
-  message?: string | null;
+  message?: string | undefined;
 };
 
 const ErrorMsg = ({ message }: Props) => {

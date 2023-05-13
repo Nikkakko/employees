@@ -32,19 +32,18 @@ export const employeesApi = api.injectEndpoints({
         body: employee,
       }),
     }),
+    deleteEmployee: builder.mutation<string, string>({
+      query: id => ({
+        url: `/employees/remove/${id}`,
+        method: 'POST',
+      }),
+    }),
 
     updateEmployee: builder.mutation<EmployeeType, EmployeeType>({
       query: employee => ({
         url: `/employees/edit/${employee.id}`,
         method: 'PUT',
         body: employee,
-      }),
-    }),
-
-    deleteEmployee: builder.mutation<EmployeeType, string>({
-      query: id => ({
-        url: `/employees/remove/${id}`,
-        method: 'POST',
       }),
     }),
   }),

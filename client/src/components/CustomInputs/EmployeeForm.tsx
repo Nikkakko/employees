@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form, Card, Space } from 'antd';
 import { EmployeeType } from '../../app/services/employees';
-import { CustomInput } from '..';
+import { CustomButton, CustomInput } from '..';
 import ErrorMsg from '../ErrorMsg';
 
 interface EmployeeFormProps {
@@ -12,14 +12,19 @@ interface EmployeeFormProps {
   employee?: EmployeeType | undefined;
 }
 
-const EmployeeForm: FC<EmployeeFormProps> = ({ onFinish, error, employee }) => {
+const EmployeeForm: FC<EmployeeFormProps> = ({
+  onFinish,
+  error,
+  employee,
+  btnText,
+}) => {
   return (
     <Card style={{ width: 500, margin: 'auto', marginTop: '30px' }}>
       <Form
         name='employee-form'
         initialValues={employee}
         onFinish={values => {
-          console.log(values, 'values');
+          onFinish && onFinish(values);
         }}
         layout='vertical'
       >
@@ -28,14 +33,9 @@ const EmployeeForm: FC<EmployeeFormProps> = ({ onFinish, error, employee }) => {
         <CustomInput name='address' type='text' placeholder='Address' />
         <CustomInput name='age' type='number' placeholder='Age' />
         <Space>
-          <ErrorMsg error={error} />
+          <ErrorMsg message={error} />
+          <CustomButton htmlType='submit'>{btnText}</CustomButton>
         </Space>
-
-        <Form.Item>
-          <button type='submit' className='btn btn-primary'>
-            Submit
-          </button>
-        </Form.Item>
       </Form>
     </Card>
   );
